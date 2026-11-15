@@ -1,0 +1,39 @@
+{
+  "name": "Old Oaks #7244",
+  "description": "Old Oaks #7244 \u2014 a Young Oak spirit of Sherwood Forest. An ancient oak face in the bark, glowing eyes, moss and a brass lantern, standing guard through the night.",
+  "image": "https://oldoaks.github.io/metadata/images/7244.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Moonlit Grove"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Emerald"
+    },
+    {
+      "trait_type": "Bark / Face",
+      "value": "Wise"
+    },
+    {
+      "trait_type": "Branches",
+      "value": "Bare Twigs"
+    },
+    {
+      "trait_type": "Moss & Leaves",
+      "value": "Light Moss"
+    },
+    {
+      "trait_type": "Lantern",
+      "value": "Twin Lanterns"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Young Oak"
+    },
+    {
+      "trait_type": "Trait Count",
+      "value": 8
+    }
+  ]
+}
