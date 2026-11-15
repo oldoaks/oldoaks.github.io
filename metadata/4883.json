@@ -1,0 +1,39 @@
+{
+  "name": "Old Oaks #4883",
+  "description": "Old Oaks #4883 \u2014 a Elder Oak spirit of Sherwood Forest. An ancient oak face in the bark, glowing eyes, moss and a brass lantern, standing guard through the night.",
+  "image": "https://oldoaks.github.io/metadata/images/4883.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Misty Forest"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Emerald"
+    },
+    {
+      "trait_type": "Bark / Face",
+      "value": "Smiling"
+    },
+    {
+      "trait_type": "Branches",
+      "value": "Sprout"
+    },
+    {
+      "trait_type": "Moss & Leaves",
+      "value": "Light Moss"
+    },
+    {
+      "trait_type": "Lantern",
+      "value": "Twin Lanterns"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Elder Oak"
+    },
+    {
+      "trait_type": "Trait Count",
+      "value": 8
+    }
+  ]
+}
