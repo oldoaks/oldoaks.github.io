@@ -1,0 +1,39 @@
+{
+  "name": "Old Oaks #8917",
+  "description": "Old Oaks #8917 \u2014 a Sapling spirit of Sherwood Forest. An ancient oak face in the bark, glowing eyes, moss and a brass lantern, standing guard through the night.",
+  "image": "https://oldoaks.github.io/metadata/images/8917.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Moonlit Grove"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Emerald"
+    },
+    {
+      "trait_type": "Bark / Face",
+      "value": "Sleepy"
+    },
+    {
+      "trait_type": "Branches",
+      "value": "Sprout"
+    },
+    {
+      "trait_type": "Moss & Leaves",
+      "value": "Green Leaves"
+    },
+    {
+      "trait_type": "Lantern",
+      "value": "Blue Flame"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Sapling"
+    },
+    {
+      "trait_type": "Trait Count",
+      "value": 8
+    }
+  ]
+}
