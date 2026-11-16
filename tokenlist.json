@@ -1,0 +1,31 @@
+{
+  "name": "Old Oaks",
+  "timestamp": "2026-11-16T10:55:00Z",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "https://oldoaks.github.io/oaks-token-logo.png",
+  "keywords": [
+    "oldoaks",
+    "oaks",
+    "robinhood"
+  ],
+  "tokens": [
+    {
+      "chainId": 4663,
+      "address": "0xdd19a309F0883dA5b0A6272363bC68C37cD7Ba97",
+      "name": "Old Oaks",
+      "symbol": "OAKS",
+      "decimals": 18,
+      "logoURI": "https://oldoaks.github.io/oaks-token-logo.png",
+      "extensions": {
+        "website": "https://oldoaks.github.io",
+        "twitter": "https://x.com/oldoaksai",
+        "description": "Old Oaks ($OAKS) is the official token of the Old Oaks NFT collection: 8,275 oak spirits on Robinhood Chain. 1B fixed supply: 500M for liquidity, 100M airdrop to NFT holders, 400M team/staking."
+      }
+    }
+  ]
+}
