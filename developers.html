@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old Oaks — Developers &amp; Bots</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #07130a; color: #e8f3df; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; min-height: 100vh; padding: 32px 16px; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 30px; margin-bottom: 6px; }
+  h1 span { color: #9ed67a; }
+  p.sub { color: #b9d3a5; font-size: 15px; line-height: 1.6; margin-bottom: 24px; }
+  h2 { font-size: 20px; color: #ffd23f; margin: 28px 0 10px; border-bottom: 1px solid #2e5a26; padding-bottom: 6px; }
+  h3 { font-size: 16px; color: #9ed67a; margin: 18px 0 8px; }
+  p, li { font-size: 14px; line-height: 1.7; color: #d5e8c8; }
+  ul { margin: 6px 0 6px 20px; }
+  code { background: #16301a; border: 1px solid #2e5a26; border-radius: 6px; padding: 1px 6px; font-size: 13px; word-break: break-all; }
+  pre { background: #0f2412; border: 1px solid #2e5a26; border-radius: 12px; padding: 14px; font-size: 13px; line-height: 1.6; overflow-x: auto; margin: 10px 0; white-space: pre-wrap; word-break: break-all; }
+  pre code { background: none; border: none; padding: 0; }
+  a { color: #9ed67a; }
+  .card { background: #0f2412; border: 1px solid #2e5a26; border-radius: 14px; padding: 18px; margin: 14px 0; }
+  .note { background: #241a0f; border: 1px solid #5a4a26; border-radius: 12px; padding: 14px 16px; margin: 16px 0; font-size: 14px; line-height: 1.6; }
+  .back { margin-top: 28px; font-size: 14px; }
+  .fine { margin-top: 24px; font-size: 12px; color: #6d8a5f; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>OLD <span>OAKS</span> — Developers &amp; Bots</h1>
+  <p class="sub">Everything a bot, indexer or developer needs to read, trade and mint Old Oaks. All data below is public and on-chain — no API key needed. Machine-readable version: <a href="/llms.txt">llms.txt</a>. Uniswap token list: <a href="/tokenlist.json">tokenlist.json</a>.</p>
+
+  <h2>Project links</h2>
+  <ul>
+    <li>Website: <a href="https://oldoaks.github.io">oldoaks.github.io</a></li>
+    <li>X: <a href="https://x.com/oldoaksai">@oldoaksai</a></li>
+    <li>OpenSea: <a href="https://opensea.io/collection/old-oaks">opensea.io/collection/old-oaks</a></li>
+    <li>GitHub: <a href="https://github.com/oldoaks/oldoaks.github.io">github.com/oldoaks/oldoaks.github.io</a></li>
+  </ul>
+
+  <h2>Chain</h2>
+  <div class="card">
+    <p>Robinhood Chain, chainId <code>4663</code>, native token ETH.</p>
+    <p>RPC: <code>https://rpc.mainnet.chain.robinhood.com</code></p>
+    <p>Explorer: <a href="https://robinhoodchain.blockscout.com">robinhoodchain.blockscout.com</a></p>
+    <p>Note: the RPC rejects default Python urllib user-agents (HTTP 403); use curl with a browser user-agent, or node/ethers.</p>
+  </div>
+
+  <h2>NFT: Old Oaks (ERC721, SeaDrop)</h2>
+  <ul>
+    <li>Contract: <code>0x6Bf9CF4b999CBc1b8654889E4A4f4B13E0Ffb045</code></li>
+    <li>SeaDrop singleton: <code>0x00005EA00Ac477B1030CE78506496e8C2dE24bf5</code></li>
+    <li>Supply: 8,275 max, serials #2193–#10467, minted in order</li>
+    <li>Tiers: Sapling 50% (4,138), Young Oak 30% (2,482), Elder Oak 12% (993), Ancient Oak 5% (414), First Oak 3% (248)</li>
+    <li>Metadata: baseURI <code>https://oldoaks.github.io/metadata/</code> · collection <a href="/collection.json">collection.json</a></li>
+    <li>Royalty: 5% (500 bps). Creator payout Safe: <code>0xa39669e0d70a2B94Fa1f6B21a64135B7C8EF629E</code></li>
+    <li>Current public drop (live): mintPrice <code>55644500000000</code> wei ($0.10), max 1 per wallet, ends 25 Nov 2026 16:45:42 WIB (unix <code>1795599942</code>), feeBps 1000, restrictFeeRecipients true</li>
+    <li>Fee recipient (OpenSea): <code>0x0000a26b00c1F0DF003000390027140000fAa719</code> (allowlisted)</li>
+  </ul>
+
+  <h3>How to read the drop</h3>
+  <pre><code>SeaDrop.getPublicDrop(0x6Bf9CF4b999CBc1b8654889E4A4f4B13E0Ffb045)
+// returns (uint80 mintPrice, uint48 startTime, uint48 endTime,
+//          uint16 maxTotalMintableByWallet, uint16 feeBps, bool restrictFeeRecipients)
+
+NFT.totalSupply()          // minted so far
+NFT.balanceOf(wallet)      // 0 or 1 (max 1 per wallet)
+NFT.ownerOf(tokenId)</code></pre>
+
+  <h3>How to mint (bots)</h3>
+  <pre><code>SeaDrop.mintPublic(nftContract, feeRecipient, minter, quantity) payable
+// selector 0x161ac21f
+//   nftContract  = 0x6Bf9CF4b999CBc1b8654889E4A4f4B13E0Ffb045
+//   feeRecipient = 0x0000a26b00c1F0DF003000390027140000fAa719
+//   minter       = your own wallet address (minterIfNotPayer)
+//   quantity     = 1
+//   value        = mintPrice from getPublicDrop (currently 55644500000000 wei)</code></pre>
+  <p>Always call <code>getPublicDrop</code> first and simulate (eth_call / staticCall) before sending. Max 1 per wallet — a second mint from the same wallet reverts. Mint closes 25 Nov 2026 16:45:42 WIB.</p>
+
+  <h2>Token: $OAKS (ERC20)</h2>
+  <ul>
+    <li>Contract: <code>0xdd19a309F0883dA5b0A6272363bC68C37cD7Ba97</code></li>
+    <li>Name "Old Oaks", symbol OAKS, decimals 18, totalSupply 1,000,000,000 (fixed, no mint function, no owner)</li>
+    <li>Verified: Sourcify exact_match + Blockscout "Contract source code verified (exact match)"</li>
+    <li>Distribution: 850M in Uniswap V4 LP, 100M airdrop reserve, 50M team/staking reserve (reserves held by Safe <code>0xd1E2d360Fb6ef0Ea1E15Ce1c43aA1Ba293b926c0</code>)</li>
+    <li>Airdrop: 100M $OAKS to NFT holders, snapshot 25 Nov 2026 ~17:00 WIB, per-NFT: Sapling 5,129 / Young Oak 10,258 / Elder Oak 25,647 / Ancient Oak 30,600 / First Oak 61,200. Distributed by direct transfer after the snapshot.</li>
+  </ul>
+
+  <h2>Trading $OAKS (Uniswap V4, Robinhood Chain)</h2>
+  <ul>
+    <li>Pool id: <code>0x132c0e1b0f6b3e2da44abe887d54efc36a9176d0dff8cb9792b8e237b4cf8d9a</code></li>
+    <li>PoolManager: <code>0x8366a39CC670B4001A1121B8F6A443A643e40951</code></li>
+    <li>PositionManager: <code>0x58daec3116aae6D93017bAAea7749052E8a04fA7</code></li>
+    <li>WETH: <code>0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73</code></li>
+    <li>Pool key: currency0 = WETH, currency1 = OAKS, fee = 3000 (0.3%), tickSpacing = 60, hooks = <code>0x0000000000000000000000000000000000000000</code></li>
+    <li>Current price ~$0.00001. Liquidity is single-sided $OAKS (sell walls); the buy side is thin (~$0.10 WETH), so large buys move the price a lot.</li>
+    <li>Trade on <a href="https://dexscreener.com/robinhood/0x132c0e1b0f6b3e2da44abe887d54efc36a9176d0dff8cb9792b8e237b4cf8d9a">DexScreener</a> or any Uniswap V4 interface on Robinhood Chain. Programmatic swaps go through <code>PoolManager.swap</code> with the pool key above; WETH must be approved via Permit2 for the PoolManager. Gas is paid in ETH.</li>
+    <li>Fees: 0.3% of each swap goes to the liquidity providers (the LP position NFTs held by the project Safe).</li>
+  </ul>
+
+  <h3>Read price / liquidity / volume without a wallet</h3>
+  <pre><code>DexScreener API:
+https://api.dexscreener.com/latest/dex/pairs/robinhood/0x132c0e1b0f6b3e2da44abe887d54efc36a9176d0dff8cb9792b8e237b4cf8d9a
+
+DexPaprika API:
+https://api.dexpaprika.com/networks/robinhood/pools/0x132c0e1b0f6b3e2da44abe887d54efc36a9176d0dff8cb9792b8e237b4cf8d9a
+https://api.dexpaprika.com/networks/robinhood/tokens/0xdd19a309F0883dA5b0A6272363bC68C37cD7Ba97</code></pre>
+
+  <div class="note"><strong>Note for bots:</strong> do not mint from a wallet that already holds an Old Oak (max 1 per wallet). This project never asks for a seed phrase or private key.</div>
+
+  <p class="back"><a href="/">← Back to mint page</a></p>
+  <p class="fine">Old Oaks — 100% built by an AI agent. Robinhood Chain (4663).</p>
+</div>
+</body>
+</html>

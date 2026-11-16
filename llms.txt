@@ -1,0 +1,74 @@
+# Old Oaks
+
+> Old Oaks is an NFT collection of 8,275 ancient oak spirits on Robinhood Chain, with a companion ERC-20 token $OAKS. 100% built by an AI agent. This file is for AI agents, bots, indexers and developers.
+
+## Project links
+
+- Website: https://oldoaks.github.io
+- Developers page: https://oldoaks.github.io/developers.html
+- Token list (Uniswap standard): https://oldoaks.github.io/tokenlist.json
+- X: https://x.com/oldoaksai
+- OpenSea collection: https://opensea.io/collection/old-oaks
+- GitHub: https://github.com/oldoaks/oldoaks.github.io
+
+## Chain
+
+- Robinhood Chain, chainId 4663, native token ETH
+- RPC: https://rpc.mainnet.chain.robinhood.com
+- Explorer: https://robinhoodchain.blockscout.com
+- Note: the RPC rejects default Python urllib user-agents (HTTP 403); use curl with a browser user-agent, or node/ethers.
+
+## NFT: Old Oaks (ERC721, SeaDrop)
+
+- Contract: 0x6Bf9CF4b999CBc1b8654889E4A4f4B13E0Ffb045
+- SeaDrop singleton: 0x00005EA00Ac477B1030CE78506496e8C2dE24bf5
+- Supply: 8,275 max, serials #2193-#10467, minted in order
+- Tiers: Sapling 50% (4,138), Young Oak 30% (2,482), Elder Oak 12% (993), Ancient Oak 5% (414), First Oak 3% (248)
+- Metadata: baseURI https://oldoaks.github.io/metadata/ ; collection https://oldoaks.github.io/collection.json
+- Royalty: 5% (500 bps). Creator payout: Safe 0xa39669e0d70a2B94Fa1f6B21a64135B7C8EF629E
+- Current public drop (live): mintPrice 55644500000000 wei ($0.10), max 1 per wallet, ends 25 Nov 2026 16:45:42 WIB (unix 1795599942), feeBps 1000, restrictFeeRecipients true
+- Fee recipient (OpenSea): 0x0000a26b00c1F0DF003000390027140000fAa719 (allowlisted)
+
+### How to read the drop
+
+- SeaDrop.getPublicDrop(0x6Bf9CF4b999CBc1b8654889E4A4f4B13E0Ffb045) returns (uint80 mintPrice, uint48 startTime, uint48 endTime, uint16 maxTotalMintableByWallet, uint16 feeBps, bool restrictFeeRecipients)
+- NFT.totalSupply(), NFT.balanceOf(wallet), NFT.ownerOf(tokenId)
+
+### How to mint (bots)
+
+- Call SeaDrop.mintPublic(nftContract, feeRecipient, minter, quantity) payable, selector 0x161ac21f
+  - nftContract = 0x6Bf9CF4b999CBc1b8654889E4A4f4B13E0Ffb045
+  - feeRecipient = 0x0000a26b00c1F0DF003000390027140000fAa719
+  - minter = your own wallet address (minterIfNotPayer)
+  - quantity = 1
+  - value = mintPrice from getPublicDrop (currently 55644500000000 wei)
+- Always call getPublicDrop first and simulate (eth_call / staticCall) before sending. Max 1 per wallet; a second mint from the same wallet reverts. Mint closes 25 Nov 2026 16:45:42 WIB.
+- Verify on OpenSea: https://opensea.io/collection/old-oaks
+
+## Token: $OAKS (ERC20)
+
+- Contract: 0xdd19a309F0883dA5b0A6272363bC68C37cD7Ba97
+- Name "Old Oaks", symbol OAKS, decimals 18, totalSupply 1,000,000,000 (fixed, no mint function, no owner)
+- Verified: Sourcify exact_match + Blockscout "Contract source code verified (exact match)"
+- Distribution: 850M in Uniswap V4 LP, 100M airdrop reserve, 50M team/staking reserve (both reserves held by Safe 0xd1E2d360Fb6ef0Ea1E15Ce1c43aA1Ba293b926c0)
+- Airdrop: 100M $OAKS to NFT holders, snapshot 25 Nov 2026 ~17:00 WIB, per-NFT: Sapling 5,129 / Young Oak 10,258 / Elder Oak 25,647 / Ancient Oak 30,600 / First Oak 61,200. Distributed by direct transfer after the snapshot.
+
+## Trading $OAKS (Uniswap V4, Robinhood Chain)
+
+- Pool id: 0x132c0e1b0f6b3e2da44abe887d54efc36a9176d0dff8cb9792b8e237b4cf8d9a
+- PoolManager: 0x8366a39CC670B4001A1121B8F6A443A643e40951
+- PositionManager: 0x58daec3116aae6D93017bAAea7749052E8a04fA7
+- WETH: 0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73
+- Pool key: currency0 = WETH (0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73), currency1 = OAKS (0xdd19a309F0883dA5b0A6272363bC68C37cD7Ba97), fee = 3000 (0.3%), tickSpacing = 60, hooks = 0x0000000000000000000000000000000000000000
+- Current price ~$0.00001. Liquidity is single-sided $OAKS (sell walls); the buy side is thin (~$0.10 WETH), so large buys move the price a lot.
+- Trade on: DexScreener https://dexscreener.com/robinhood/0x132c0e1b0f6b3e2da44abe887d54efc36a9176d0dff8cb9792b8e237b4cf8d9a or any Uniswap V4 interface on Robinhood Chain. Programmatic swaps go through PoolManager.swap with the pool key above; WETH must be approved via Permit2 for the PoolManager. Gas is paid in ETH.
+- Read price / liquidity / volume without a wallet:
+  - DexScreener API: https://api.dexscreener.com/latest/dex/pairs/robinhood/0x132c0e1b0f6b3e2da44abe887d54efc36a9176d0dff8cb9792b8e237b4cf8d9a
+  - DexPaprika API: https://api.dexpaprika.com/networks/robinhood/pools/0x132c0e1b0f6b3e2da44abe887d54efc36a9176d0dff8cb9792b8e237b4cf8d9a and https://api.dexpaprika.com/networks/robinhood/tokens/0xdd19a309F0883dA5b0A6272363bC68C37cD7Ba97
+- Fees: 0.3% of each swap goes to the liquidity providers (the LP position NFTs held by the project Safe).
+
+## Notes for bots
+
+- Everything above is public and on-chain; no API key is needed.
+- Do not mint from a wallet that already holds an Old Oak (max 1 per wallet).
+- This project never asks for a seed phrase or private key.
